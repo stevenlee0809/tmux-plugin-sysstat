@@ -13,7 +13,7 @@ mem_view_tmpl=$(get_tmux_option "@sysstat_mem_view_tmpl" 'MEM:#[fg=#{mem.color}]
 mem_medium_threshold=$(get_tmux_option "@sysstat_mem_medium_threshold" "75")
 mem_stress_threshold=$(get_tmux_option "@sysstat_mem_stress_threshold" "90")
 
-mem_color_low=$(get_tmux_option "@sysstat_mem_color_low" "green")
+mem_color_low=$(get_tmux_option "@sysstat_mem_color_low" "fg")
 mem_color_medium=$(get_tmux_option "@sysstat_mem_color_medium" "yellow")
 mem_color_stress=$(get_tmux_option "@sysstat_mem_color_stress" "red")
 
@@ -59,7 +59,7 @@ print_mem() {
   
   local mem_view="$mem_view_tmpl"
   mem_view="${mem_view//'#{mem.used}'/$(printf "$size_format" "$mem_used" "$size_unit")}"
-  mem_view="${mem_view//'#{mem.pused}'/$(printf "%.0f%%" "$mem_pused")}"
+  mem_view="${mem_view//'#{mem.pused}'/$(printf "%3.0f%%" "$mem_pused")}"
   mem_view="${mem_view//'#{mem.free}'/$(printf "$size_format" "$mem_free" "$size_unit")}"
   mem_view="${mem_view//'#{mem.pfree}'/$(printf "%.0f%%" "$mem_pfree")}"
   mem_view="${mem_view//'#{mem.total}'/$(printf "$size_format" "$mem_total" "$size_unit")}"  
