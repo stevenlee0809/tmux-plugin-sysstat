@@ -15,7 +15,7 @@ cpu_view_tmpl=$(get_tmux_option "@sysstat_cpu_view_tmpl" 'CPU:#[fg=#{cpu.color}]
 cpu_medium_threshold=$(get_tmux_option "@sysstat_cpu_medium_threshold" "30")
 cpu_stress_threshold=$(get_tmux_option "@sysstat_cpu_stress_threshold" "80")
 
-cpu_color_low=$(get_tmux_option "@sysstat_cpu_color_low" "green")
+cpu_color_low=$(get_tmux_option "@sysstat_cpu_color_low" "bg")
 cpu_color_medium=$(get_tmux_option "@sysstat_cpu_color_medium" "yellow")
 cpu_color_stress=$(get_tmux_option "@sysstat_cpu_color_stress" "red")
 
@@ -36,7 +36,7 @@ print_cpu_usage() {
   local cpu_color=$(get_cpu_color "$cpu_pused")
   
   local cpu_view="$cpu_view_tmpl"
-  cpu_view="${cpu_view//'#{cpu.pused}'/$(printf "%.1f%%" "$cpu_pused")}"
+  cpu_view="${cpu_view//'#{cpu.pused}'/$(printf "%3.0f%%" "$cpu_pused")}"
   cpu_view="${cpu_view//'#{cpu.color}'/$(echo "$cpu_color" | awk '{ print $1 }')}"
   cpu_view="${cpu_view//'#{cpu.color2}'/$(echo "$cpu_color" | awk '{ print $2 }')}"
   cpu_view="${cpu_view//'#{cpu.color3}'/$(echo "$cpu_color" | awk '{ print $3 }')}"
